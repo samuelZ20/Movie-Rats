@@ -1,20 +1,17 @@
-# 1. IMAGEM BASE: Começamos com uma imagem oficial do Node.js.
-FROM node:18
-
-# 2. DIRETÓRIO DE TRABALHO: Criamos uma pasta /app dentro do container.
-WORKDIR /app
-
-# 3. DEPENDÊNCIAS: Copiamos os arquivos de manifesto do projeto.
-COPY package*.json ./
-
-# 4. INSTALAÇÃO: Rodamos o npm install DENTRO do container.
+# Arquivo: Dockerfile
+# 1. Escolha a imagem base. 'node:18-alpine' é leve e moderna.
+FROM node:18-alpine
+# 2. Defina o diretório de trabalho dentro do contêiner
+WORKDIR /usr/src/app
+# 3. Copie os arquivos de dependência
+COPY package.json package-lock.json ./
+# 4. Instale as dependências.
+# (O Docker usa o cache aqui. Se 'package.json' não mudou, ele pula esse passo)
 RUN npm install
-
-# 5. CÓDIGO-FONTE: Copiamos o resto do código da aplicação.
+# 5. Copie o resto do código-fonte do seu projeto
 COPY . .
-
-# 6. PORTA: Informamos ao Docker que nossa aplicação usa a porta 3000.
+# 6. Exponha a porta que sua aplicação usa (EX: 3000, 3333, 8080)
+# !!! Altere 3000 para a porta que seu app realmente usa !!!
 EXPOSE 3000
-
-# 7. COMANDO DE EXECUÇÃO: O comando para iniciar a aplicação.
+# 7. Defina o comando para iniciar sua aplicação
 CMD [ "node", "app.js" ]
