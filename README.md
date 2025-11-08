@@ -1,4 +1,4 @@
-# 🎬 Clube do Filme API (Projeto Movie-Rats)
+# 🎬 Movie Rats API (Projeto Movie-Rats)
 
 API RESTful para um aplicativo de avaliação de filmes, construída com Node.js e implantada na DigitalOcean usando Terraform e Docker. Este projeto foi desenvolvido como um estudo de ponta a ponta de um fluxo de trabalho DevOps, desde o desenvolvimento do código até a infraestrutura como código (IaC) e o deploy.
 
