@@ -40,7 +40,7 @@ Para rodar este projeto na sua máquina local, você precisa ter o **Docker** e 
 
 1.  Clone o repositório:
     ```bash
-    git clone [https://github.com/seu-usuario/Movie-Rats.git](https://github.com/seu-usuario/Movie-Rats.git)
+    git clone [https://github.com/samuelZ20/Movie-Rats.git](https://github.com/samuelZ20/Movie-Rats.git)
     cd Movie-Rats
     ```
 
