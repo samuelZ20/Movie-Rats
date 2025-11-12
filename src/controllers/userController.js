@@ -14,7 +14,7 @@ const userController = {
     try {
       const hashDaSenha = await bcrypt.hash(senha, 10);
       const resultado = await db.query(
-        'INSERT INTO usuario (nome, email, senha, nivel) VALUES ($1, $2, $3, $4) RETURNING id, nome, email, nivel',
+        'INSERT INTO usuarios (nome, email, senha, nivel) VALUES ($1, $2, $3, $4) RETURNING id, nome, email, nivel',
         [nome, email, hashDaSenha, 'padrao']
       );
       return res.status(201).json({ message: 'Usuário registrado com sucesso!', usuario: resultado.rows[0] });

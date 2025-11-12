@@ -67,3 +67,9 @@ jspm_packages/
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Terraform state and provider files
+.terraform/
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.backup
