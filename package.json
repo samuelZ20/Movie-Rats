@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "API REST para um sistema de Achados e Perdidos para a UFLA (projeto CompJr💙)",
   "main": "achados_e_perdidos.js",
-  "scripts": {
+ "scripts": {
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

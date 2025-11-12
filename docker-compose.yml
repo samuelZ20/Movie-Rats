@@ -1,39 +1,48 @@
-# Arquivo: docker-compose.yml
-version: '3.8'
-
 services:
-  # 1. O serviço da sua aplicação Node.js
   app:
-    build: .  # Manda ele construir a partir do Dockerfile na pasta atual
+    build: .
     container_name: meu-projeto-app
     ports:
-      - "3000:3000"  # Mapeia: porta da SUA MÁQUINA : porta do CONTÊINER
-                     # !!! Altere o '3000' para bater com a porta do seu app !!!
+      - "3000:3000"
     environment:
-      # Variáveis de ambiente que seu app vai receber
-      - NODE_ENV=development
-      - DB_HOST=db         # <-- A MÁGICA! O host do DB é o nome do serviço 'db'
+      # Verifique se o seu ficheiro .env está a ser lido
+      # ou defina as variáveis aqui.
+      - DB_HOST=db
       - DB_USER=postgres
       - DB_PASSWORD=meusecret
       - DB_NAME=meubanco
       - DB_PORT=5432
+      # Adicione o seu JWT_SECRET aqui
+    
+    # Isto força a 'app' a esperar que o 'db'
+    # passe no "teste de saúde" antes de ligar.
     depends_on:
-      - db  # Diz para o 'app' esperar o 'db' subir primeiro
+      db:
+        condition: service_healthy
 
-  # 2. O serviço do Banco de Dados (Exemplo com PostgreSQL)
   db:
-    image: postgres:15-alpine  # Imagem oficial do Postgres
-    container_name: meu-projeto-db
+    image: postgres:15-alpine
+    container_name: movie-rats-db
     environment:
-      # Cria o banco e o usuário/senha no primeiro boot
+      # Estas variáveis criam o banco
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=meusecret
       - POSTGRES_DB=meubanco
     ports:
-      - "5432:5432"  # Expõe a porta do Postgres (opcional, bom para debugar)
+      - "5433:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data  # Garante que os dados não sumam
+      # Esta linha executa o seu script de tabelas
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
+      # Esta linha guarda os seus dados
+      - postgres_data:/var/lib/postgresql/data
 
-# Define um "volume" para persistir os dados do banco
+    # Este é o "teste de saúde" que verifica se o
+    # Postgres está pronto para receber ligações.
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d meubanco"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
 volumes:
   postgres_data:
