@@ -4,6 +4,9 @@ services:
     container_name: meu-projeto-app
     ports:
       - "3000:3000"
+
+    env_file:
+      - ./.env
     environment:
       # Verifique se o seu ficheiro .env está a ser lido
       # ou defina as variáveis aqui.
