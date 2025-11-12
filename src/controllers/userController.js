@@ -36,7 +36,6 @@ const userController = {
       return res.status(500).json({ error: 'Erro interno do servidor.' });
     }
   },
-
   //UPDATE de um usuário
   async update(req, res) {
     const userId = req.params.id;
