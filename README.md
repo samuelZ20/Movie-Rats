@@ -61,13 +61,13 @@ Para rodar este projeto na sua máquina local, você precisa ter o **Docker** e 
 
     # Configuração do Banco (para Docker Compose)
     DB_HOST=db
-    DB_PORT=5432
+    DB_PORT=5433
     DB_USER=postgres
     DB_PASSWORD=meusecret
     DB_NAME=meubanco
 
     # Segredo do JWT
-    JWT_SECRET=SEU_SEGREDO_SUPER_SEGURO_AQUI
+    JWT_SECRET=seu_segredo_aqui
     ```
 
 3.  Suba os contêineres:
