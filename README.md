@@ -55,13 +55,13 @@ Para rodar este projeto na sua máquina local, você precisa ter o **Docker** e 
     ```
 
 2.  Crie um arquivo `.env` na raiz do projeto. Você pode copiar o `.env.example` (se existir) ou usar este modelo. O `DB_HOST` deve ser `db`.
-    ```.env
+    ```ini
     # Configuração da Aplicação
     PORT=3000
 
     # Configuração do Banco (para Docker Compose)
     DB_HOST=db
-    DB_PORT=5433
+    DB_PORT=5432
     DB_USER=postgres
     DB_PASSWORD=meusecret
     DB_NAME=meubanco
@@ -126,16 +126,21 @@ Esta seção documenta como provisionar automaticamente a infraestrutura na Digi
 * Um par de chaves SSH (pública e privada) gerado no seu PC e a chave pública adicionada ao painel da DigitalOcean.
 
 ### Passo 1: Provisionar o Servidor
+
 1.  Navegue até a pasta de infraestrutura:
     ```bash
     cd infra
     ```
+
 2.  (Opcional) Ajuste o `main.tf` para que o `name` da `data "digitalocean_ssh_key"` seja igual ao nome da sua chave no DigitalOcean.
 
 3.  Defina seu token de acesso como uma variável de ambiente:
     ```powershell
-    # Exemplo para PowerShell
+    # Exemplo para PowerShell (Windows)
     $env:DIGITALOCEAN_TOKEN = "seu_token_aqui"
+    
+    # Exemplo para Bash (Linux/Mac)
+    export DIGITALOCEAN_TOKEN="seu_token_aqui"
     ```
 
 4.  Inicialize o Terraform (só na primeira vez):
@@ -147,20 +152,21 @@ Esta seção documenta como provisionar automaticamente a infraestrutura na Digi
     ```bash
     terraform apply
     ```
-    (Digite `yes` para confirmar)
+    *(Digite `yes` para confirmar quando solicitado)*
 
-6.  Obtenha o IP do servidor:
+6.  Obtenha o IP do servidor criado:
     ```bash
     terraform output ip_do_servidor
     ```
 
 ### Passo 2: Deploy Manual da Aplicação
-1.  Acesse seu novo servidor via SSH (use o IP do passo anterior):
+
+1.  Acesse seu novo servidor via SSH (use o IP obtido no passo anterior):
     ```bash
     ssh root@IP_DO_SERVIDOR
     ```
 
-2.  Instale o Docker, Docker Compose e Git:
+2.  Instale o Docker, Docker Compose e Git no servidor:
     ```bash
     apt update
     apt install docker.io docker-compose git -y
@@ -168,28 +174,27 @@ Esta seção documenta como provisionar automaticamente a infraestrutura na Digi
 
 3.  Clone o seu projeto **dentro do servidor**:
     ```bash
-    git clone https://github.com/samuelZ20/Movie-Rats.git
+    git clone [https://github.com/samuelZ20/Movie-Rats.git](https://github.com/samuelZ20/Movie-Rats.git)
     cd Movie-Rats
     ```
 
-4.  Crie o arquivo `.env, para isso: nano .env` **dentro do servidor** (siga o mesmo modelo da seção local).
-5.  (Isso vai abrir uma tela preta vazia, que é o editor de texto).
+4.  Crie o arquivo `.env` dentro do servidor:
+    ```bash
+    nano .env
+    ```
+    *(Isso vai abrir um editor de texto no terminal)*
 
-Cole as configurações: Copie o texto abaixo e cole dentro dessa tela preta (clique com o botão direito do mouse no terminal para colar):
-
-Ini, TOML
-
-DB_HOST=db
-DB_PORT=5432
-DB_USER=postgres
-DB_PASSWORD=meusecret
-DB_NAME=meubanco
-JWT_SECRET=seu_segredo_super_secreto
-Salve e Saia:
-
-Aperte Ctrl + O (letra O) e depois Enter (para salvar).
-
-Aperte Ctrl + X (para sair do editor).
+5.  Cole as configurações abaixo dentro do editor:
+    ```ini
+    DB_HOST=db
+    DB_PORT=5432
+    DB_USER=postgres
+    DB_PASSWORD=meusecret
+    DB_NAME=meubanco
+    JWT_SECRET=seu_segredo_super_secreto
+    ```
+    * **Para Salvar:** Pressione `Ctrl + O` e depois `Enter`.
+    * **Para Sair:** Pressione `Ctrl + X`.
 
 6.  Abra o firewall do servidor para a porta da sua API:
     ```bash
@@ -207,8 +212,8 @@ Aperte Ctrl + X (para sair do editor).
 
 ## 🗑️ Como Destruir a Infraestrutura
 
-Para evitar custos, destrua toda a infraestrutura criada pelo Terraform com um único comando.
+Para evitar custos na nuvem, destrua toda a infraestrutura criada pelo Terraform com um único comando quando terminar.
 
 ```bash
-# Na pasta /infra (no seu PC)
+# Na pasta /infra (no seu computador local)
 terraform destroy
