@@ -168,23 +168,40 @@ Esta seção documenta como provisionar automaticamente a infraestrutura na Digi
 
 3.  Clone o seu projeto **dentro do servidor**:
     ```bash
-    git clone [https://github.com/samuelZ20/Movie-Rats.git](https://github.com/samuelZ20/Movie-Rats.git)
+    git clone https://github.com/samuelZ20/Movie-Rats.git
     cd Movie-Rats
     ```
 
-4.  Crie o arquivo `.env` **dentro do servidor** (siga o mesmo modelo da seção local).
+4.  Crie o arquivo `.env, para isso: nano .env` **dentro do servidor** (siga o mesmo modelo da seção local).
+5.  (Isso vai abrir uma tela preta vazia, que é o editor de texto).
 
-5.  Abra o firewall do servidor para a porta da sua API:
+Cole as configurações: Copie o texto abaixo e cole dentro dessa tela preta (clique com o botão direito do mouse no terminal para colar):
+
+Ini, TOML
+
+DB_HOST=db
+DB_PORT=5432
+DB_USER=postgres
+DB_PASSWORD=meusecret
+DB_NAME=meubanco
+JWT_SECRET=seu_segredo_super_secreto
+Salve e Saia:
+
+Aperte Ctrl + O (letra O) e depois Enter (para salvar).
+
+Aperte Ctrl + X (para sair do editor).
+
+6.  Abra o firewall do servidor para a porta da sua API:
     ```bash
     ufw allow 3000/tcp
     ```
 
-6.  Suba os contêineres **no servidor**:
+7.  Suba os contêineres **no servidor**:
     ```bash
     docker-compose up -d --build
     ```
 
-7.  **Pronto!** A sua API estará publicamente acessível em `http://IP_DO_SERVIDOR:3000`.
+8.  **Pronto!** A sua API estará publicamente acessível em `http://IP_DO_SERVIDOR:3000`.
 
 ---
 
