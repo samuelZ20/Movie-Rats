@@ -174,7 +174,7 @@ Esta seção documenta como provisionar automaticamente a infraestrutura na Digi
 
 3.  Clone o seu projeto **dentro do servidor**:
     ```bash
-    git clone [https://github.com/samuelZ20/Movie-Rats.git](https://github.com/samuelZ20/Movie-Rats.git)
+    git clone https://github.com/samuelZ20/Movie-Rats.git
     cd Movie-Rats
     ```
 
