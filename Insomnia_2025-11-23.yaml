@@ -1,0 +1,417 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: Clube Do Filme
+meta:
+  id: wrk_80d9b9301fe14f45b8fc922f6d20bb09
+  created: 1760146837386
+  modified: 1760146869017
+  description: ""
+collection:
+  - url: http://localhost:3000/
+    name: Health Check
+    meta:
+      id: req_30f8b6eae0fa4808bd60188ef49476c4
+      created: 1760146837569
+      modified: 1760147500131
+      isPrivate: false
+      description: ""
+      sortKey: -1760146837569
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.6.1
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:3000/users
+    name: Create User
+    meta:
+      id: req_fa8ffdea9b75478588a5ca09c390fd9d
+      created: 1760148482053
+      modified: 1763830702864
+      isPrivate: false
+      description: ""
+      sortKey: -1760146837519
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+            "nome": "Samuel Trainee",
+            "email": "samuel.cardoso@compjunior.com.br",
+            "senha": "123"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.6.1
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:3000/users
+    name: List All Users
+    meta:
+      id: req_81a2c55d08074756bf048b16d08e626a
+      created: 1760200870730
+      modified: 1763831747322
+      isPrivate: false
+      description: ""
+      sortKey: -1760146837469
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.6.1
+    authentication:
+      type: bearer
+      disabled: false
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwibml2ZWwiOiJhZG1pbiIsImlhdCI6MTc2MzgzMTczMSwiZXhwIjoxNzYzODM1MzMxfQ.uPioZ1N2bUnuxcI_IC7p-s3fdXdVyO8kVBCXrq9XZe0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:3000/login
+    name: Login User
+    meta:
+      id: req_e3671209c0b14697ac7da52fcf0bbca7
+      created: 1760281911089
+      modified: 1763830382794
+      isPrivate: false
+      description: ""
+      sortKey: -1760146837494
+    method: POST
+    body:
+      mimeType: application/json
+      text: |
+        {
+            "email": "samuel.cardoso@compjunior.com.br",
+            "senha": "123"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.6.1
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:3000/filmes
+    name: List All Movies
+    meta:
+      id: req_58cf0f2f22f74d199519d337ad1bef1d
+      created: 1760559756981
+      modified: 1760559944322
+      isPrivate: false
+      description: ""
+      sortKey: -1760146837544
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.6.1
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:3000/filmes
+    name: Create Movie
+    meta:
+      id: req_3642070ffd0d408ba0bf48ed6887c99e
+      created: 1760559834618
+      modified: 1763831764598
+      isPrivate: false
+      description: ""
+      sortKey: -1760146837506.5
+    method: POST
+    body:
+      mimeType: application/json
+      text: >-
+        {
+            "titulo": "Interestellar",
+            "diretor": "Christopher Nolan",
+            "ano": 2014 ,
+            "sinopse": "Conta a história de uma equipe de astronautas que viaja através de um buraco de minhoca à procura de um novo lar para a humanidade!"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.6.1
+    authentication:
+      type: bearer
+      disabled: false
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwibml2ZWwiOiJhZG1pbiIsImlhdCI6MTc2MzgzMTczMSwiZXhwIjoxNzYzODM1MzMxfQ.uPioZ1N2bUnuxcI_IC7p-s3fdXdVyO8kVBCXrq9XZe0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:3000/filmes/4
+    name: Update Movie
+    meta:
+      id: req_98a7398df8724434aa6d7985ac0e371f
+      created: 1760712709483
+      modified: 1763831913846
+      isPrivate: false
+      description: ""
+      sortKey: -1760712709483
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+            "titulo": "Velozes e Furiosos",
+            "diretor": "nao lembro",
+            "ano": 2001,
+            "sinopse": "Filme de carros"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.6.1
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwibml2ZWwiOiJhZG1pbiIsImlhdCI6MTc2MzgzMTczMSwiZXhwIjoxNzYzODM1MzMxfQ.uPioZ1N2bUnuxcI_IC7p-s3fdXdVyO8kVBCXrq9XZe0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:3000/filmes/1
+    name: Delete Movie
+    meta:
+      id: req_984f3cc90c464befa74cbd1ae8472945
+      created: 1760712954138
+      modified: 1762984059790
+      isPrivate: false
+      description: ""
+      sortKey: -1760712954138
+    method: DELETE
+    headers:
+      - name: User-Agent
+        value: insomnia/11.6.1
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibml2ZWwiOiJhZG1pbiIsImlhdCI6MTc2Mjk4MjEzOSwiZXhwIjoxNzYyOTg1NzM5fQ.BP3pH_yl_izA9eMUpty6Qs694n0FhCJurE9UcRmvvnc
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:3000/filmes/4/reviews
+    name: List All Review
+    meta:
+      id: req_04425d52a4b64e7eb3e2f991eb5ceac5
+      created: 1760807680101
+      modified: 1763831817713
+      isPrivate: false
+      description: ""
+      sortKey: -1760146837531.5
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.6.1
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwibml2ZWwiOiJhZG1pbiIsImlhdCI6MTc2MzQ2NDM4NywiZXhwIjoxNzYzNDY3OTg3fQ.Fs1hjIMzTXxfBGkdImtOQVMcdB_7mzjSO61hBTrFCfk
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:3000/filmes/4/reviews
+    name: Create Review
+    meta:
+      id: req_16c509ceb3234e55abb8f11742eaa4ef
+      created: 1760807716980
+      modified: 1763831793600
+      isPrivate: false
+      description: ""
+      sortKey: -1760146837512.75
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+            "conteudo_texto": "É um dos melhores filmes que já vi",
+            "nota": "10"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.6.1
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwibml2ZWwiOiJhZG1pbiIsImlhdCI6MTc2MzgzMTczMSwiZXhwIjoxNzYzODM1MzMxfQ.uPioZ1N2bUnuxcI_IC7p-s3fdXdVyO8kVBCXrq9XZe0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:3000/filmes/4/reviews/5
+    name: Update Review
+    meta:
+      id: req_9733d4af305d45b2b1e63c91567455d8
+      created: 1761336286955
+      modified: 1763831944230
+      isPrivate: false
+      description: ""
+      sortKey: -1760429773526
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+            "conteudo_texto": "Não gosto tanto, mas nao odeio",
+            "nota": "5"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.6.1
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwibml2ZWwiOiJhZG1pbiIsImlhdCI6MTc2MzgzMTczMSwiZXhwIjoxNzYzODM1MzMxfQ.uPioZ1N2bUnuxcI_IC7p-s3fdXdVyO8kVBCXrq9XZe0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:3000/filmes/4/reviews/5
+    name: Delete Review
+    meta:
+      id: req_11a86eb870974125ab059540f933d1ad
+      created: 1761336377799
+      modified: 1763831975170
+      isPrivate: false
+      description: ""
+      sortKey: -1760712831810.5
+    method: DELETE
+    headers:
+      - name: User-Agent
+        value: insomnia/11.6.1
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwibml2ZWwiOiJhZG1pbiIsImlhdCI6MTc2MzgzMTczMSwiZXhwIjoxNzYzODM1MzMxfQ.uPioZ1N2bUnuxcI_IC7p-s3fdXdVyO8kVBCXrq9XZe0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:3000/users/9
+    name: Delete User
+    meta:
+      id: req_fb0c0a88ea3d407ba012d382fefcfce4
+      created: 1761670090972
+      modified: 1763832019422
+      isPrivate: false
+      description: ""
+      sortKey: -1760712770646.75
+    method: DELETE
+    headers:
+      - name: User-Agent
+        value: insomnia/11.6.1
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwibml2ZWwiOiJhZG1pbiIsImlhdCI6MTc2MzgzMDIxMiwiZXhwIjoxNzYzODMzODEyfQ.jyeAleI7EeRMQ08TvvLqqUg3JP2QsZ4wK-8JXzPbCug
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:3000/users/9
+    name: Update User
+    meta:
+      id: req_1b73a0c946b94a1da16c99ece862a0f4
+      created: 1761670099885
+      modified: 1763831869395
+      isPrivate: false
+      description: ""
+      sortKey: -1760288305547.5
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+            "nome": "Samuel Membro",
+            "email": "samuel.cardoso@compjunior.com.br",
+            "senha": "123"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.6.1
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwibml2ZWwiOiJhZG1pbiIsImlhdCI6MTc2MzgzMTczMSwiZXhwIjoxNzYzODM1MzMxfQ.uPioZ1N2bUnuxcI_IC7p-s3fdXdVyO8kVBCXrq9XZe0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_49b44188ab27629ff41de8ea6fd461efa17502d1
+    created: 1760146837410
+    modified: 1760146837409
+environments:
+  name: Base Environment
+  meta:
+    id: env_49b44188ab27629ff41de8ea6fd461efa17502d1
+    created: 1760146837398
+    modified: 1760146837398
+    isPrivate: false
