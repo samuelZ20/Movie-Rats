@@ -12,6 +12,7 @@ const userController = {
       return res.status(400).json({ error: 'Nome, email e senha são obrigatórios.' });
     }
     try {
+    // Criptografa a senha antes de salvar
       const hashDaSenha = await bcrypt.hash(senha, 10);
       const resultado = await db.query(
         'INSERT INTO usuario (nome, email, senha, nivel) VALUES ($1, $2, $3, $4) RETURNING id, nome, email, nivel',
@@ -20,6 +21,7 @@ const userController = {
       return res.status(201).json({ message: 'Usuário registrado com sucesso!', usuario: resultado.rows[0] });
     } catch (error) {
       console.error('❌ Erro ao registrar usuário:', error);
+    // Tratamento de erro específico para email duplicado
       if (error.code === '23505') {
         return res.status(409).json({ error: 'Este e-mail já está em uso.' });
       }
@@ -29,6 +31,7 @@ const userController = {
   //LISTAR todos os usuários ---
   async listAll(req, res) {
     try {
+    // Retorna apenas dados seguros dos usuários(sem senhas)
       const resultado = await db.query('SELECT id, nome, email, nivel FROM usuario');
       return res.status(200).json(resultado.rows);
     } catch (error) {
@@ -41,6 +44,7 @@ const userController = {
     const userId = req.params.id;
     const { nome, email, senha, nivel } = req.body;
     try {
+    // Construção dinâmica da query para atualizar apenas os campos fornecidos
       const campos = [];
       const valores = [];
       let indice = 1;
@@ -53,6 +57,7 @@ const userController = {
         valores.push(email);
       }
       if (senha) {
+      // Se houver nova senha, criptografia novamernente
         const hashDaSenha = await bcrypt.hash(senha, 10);
         campos.push(`senha = $${indice++}`);
         valores.push(hashDaSenha);
@@ -93,15 +98,20 @@ const userController = {
       return res.status(400).json({ error: 'Email e senha são obrigatórios.' });
     }
     try {
+    // Busca o usuário pelo email
       const resultado = await db.query('SELECT * FROM usuario WHERE email = $1', [email]);
       if (resultado.rows.length === 0) {
         return res.status(401).json({ error: 'Credenciais inválidas.' });
       }
       const usuario = resultado.rows[0];
+
+      // Compara a senha fornecida com a senha armazenada
       const senhaCorreta = await bcrypt.compare(senha, usuario.senha);
       if (!senhaCorreta) {
         return res.status(401).json({ error: 'Credenciais inválidas.' });
       }
+
+      // Gera um token JWT para o usuário autenticado
       const payload = { id: usuario.id, nivel: usuario.nivel };
       const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' });
       return res.status(200).json({ message: 'Login bem-sucedido!', token: token });

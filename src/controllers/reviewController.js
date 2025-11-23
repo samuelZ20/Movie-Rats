@@ -15,6 +15,7 @@ const reviewController = {
     }
 
     try {
+    // Insere a nova review no banco de dados
       const resultado = await db.query(
         'INSERT INTO review (conteudo_texto, nota, usuario_id, filme_id) VALUES ($1, $2, $3, $4) RETURNING *',
         [conteudo_texto, nota, usuario_id, filme_id]
@@ -30,6 +31,7 @@ const reviewController = {
   async listByFilme(req, res) {
     const { filme_id } = req.params;
     try {
+    // Busca todas as reviews do filme no banco de dados
       const resultado = await db.query('SELECT * FROM review WHERE filme_id = $1', [filme_id]);
       return res.status(200).json(resultado.rows);
     } catch (error) {

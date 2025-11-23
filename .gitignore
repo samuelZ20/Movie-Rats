@@ -73,3 +73,9 @@ Thumbs.db
 .terraform.lock.hcl
 terraform.tfstate
 terraform.tfstate.backup
+
+# Ignorar arquivos de estado do Terraform
+*.tfstate
+*.tfstate.backup
+.terraform/
+.terraform.lock.hcl
